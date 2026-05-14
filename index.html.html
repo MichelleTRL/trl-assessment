@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operational Readiness Assessment | True Rein Leadership</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E3E39;
+  --navy-mid:#2A5249;
+  --gold:#7A9E96;
+  --gold-light:#EAE5DC;
+  --bg:#F0EDE8;
+  --white:#FFFFFF;
+  --text:#111827;
+  --muted:#5C6778;
+  --border:#CEC8BE;
+  --green-bg:#EAF3DE;--green-text:#2E5E0E;
+  --amber-bg:#FEF3DC;--amber-text:#7A4A08;
+  --red-bg:#FCEBEB;--red-text:#8B1F1F;
+  --radius:10px;
+  --radius-sm:6px;
+}
+html,body{min-height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text);font-size:16px;line-height:1.6}
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:2.5rem 1rem 4rem}
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;max-width:620px;width:100%;padding:2.5rem 2.5rem;box-shadow:0 2px 16px rgba(15,34,64,.06)}
+@media(max-width:600px){.card{padding:1.75rem 1.25rem}.page{padding:1.25rem .75rem 3rem}}
+.wordmark{display:flex;align-items:center;gap:10px;margin-bottom:2rem}
+.wordmark-line{width:28px;height:2px;background:var(--gold)}
+.wordmark-text{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.prog-wrap{margin-bottom:2rem}
+.prog-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:.5rem}
+.prog-track{height:3px;background:var(--border);border-radius:2px}
+.prog-fill{height:3px;background:var(--navy);border-radius:2px;transition:width .4s ease}
+.display{font-family:'DM Serif Display',serif;font-size:26px;line-height:1.3;color:var(--navy);margin-bottom:.75rem}
+.body-text{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
+.section-tag{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.q-text{font-family:'DM Serif Display',serif;font-size:20px;line-height:1.4;color:var(--navy);margin-bottom:1.5rem}
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:2rem}
+.cat-chip{border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.cat-chip svg{flex-shrink:0;opacity:.6}
+.scale-list{display:flex;flex-direction:column;gap:9px;margin-bottom:2rem}
+.scale-opt{display:flex;align-items:center;gap:13px;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);cursor:pointer;transition:border-color .15s,background .15s;user-select:none}
+.scale-opt:hover{border-color:var(--navy-mid);background:#F2F0EB}
+.scale-opt.selected{border-color:var(--navy);background:#ECF2F1}
+.radio{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;transition:all .15s;position:relative}
+.scale-opt.selected .radio{border-color:var(--navy);background:var(--navy)}
+.scale-opt.selected .radio::after{content:'';position:absolute;width:5px;height:5px;background:#fff;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)}
+.scale-label{font-size:14px;color:var(--text)}
+.scale-num{margin-left:auto;font-size:12px;color:var(--muted)}
+.btn-row{display:flex;align-items:center;justify-content:space-between}
+.btn{padding:10px 22px;border-radius:var(--radius-sm);font-size:14px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text);transition:background .15s,border-color .15s;font-family:'DM Sans',sans-serif}
+.btn:hover{background:#F0EDE8;border-color:#C4BFB5}
+.btn:disabled{opacity:.35;cursor:default;pointer-events:none}
+.btn-primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn-primary:hover{background:var(--navy-mid);border-color:var(--navy-mid)}
+.btn-full{width:100%;justify-content:center;display:flex;padding:12px 22px}
+.q-count{font-size:13px;color:var(--muted)}
+.gate-icon{width:52px;height:52px;border-radius:50%;background:var(--gold-light);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.gate-icon svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:.4rem}
+.field label span{color:var(--muted);font-weight:400}
+.field input{width:100%;padding:10px 13px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);transition:border-color .15s;outline:none}
+.field input:focus{border-color:var(--navy)}
+.field input::placeholder{color:#AAA}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.field-row{grid-template-columns:1fr}}
+.gate-note{font-size:12px;color:var(--muted);text-align:center;margin-top:.75rem;line-height:1.5}
+.error-msg{font-size:13px;color:var(--red-text);margin-top:.5rem;display:none}
+.spinner{width:20px;height:20px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;margin-right:8px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.overall-band{display:flex;align-items:center;gap:1.25rem;background:var(--bg);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.5rem;border:1px solid var(--border)}
+.score-ring{width:72px;height:72px;border-radius:50%;border:2.5px solid var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.score-big{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);line-height:1}
+.score-of{font-size:11px;color:var(--muted)}
+.overall-tier{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:.3rem}
+.overall-desc{font-size:13px;color:var(--muted);line-height:1.55}
+.cat-list{display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem}
+.cat-card{border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px}
+.cat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cat-name{font-size:14px;font-weight:500;color:var(--navy);display:flex;align-items:center;gap:7px}
+.cat-name svg{width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px}
+.badge-strong{background:var(--green-bg);color:var(--green-text)}
+.badge-developing{background:var(--amber-bg);color:var(--amber-text)}
+.badge-critical{background:var(--red-bg);color:var(--red-text)}
+.cat-bar{height:4px;background:var(--border);border-radius:2px;margin-bottom:8px}
+.cat-bar-fill{height:4px;border-radius:2px}
+.cat-detail{font-size:12px;color:var(--muted);line-height:1.55}
+.cta-band{background:var(--navy);border-radius:var(--radius);padding:1.5rem;margin-top:.5rem}
+.cta-band .display{color:#fff;font-size:20px;margin-bottom:.5rem}
+.cta-band .body-text{color:rgba(255,255,255,.7);margin-bottom:1.25rem;font-size:14px}
+.cta-link{display:inline-block;padding:10px 22px;border-radius:var(--radius-sm);background:#E7E0D5;color:#1E3E39;font-size:14px;font-weight:500;text-decoration:none;transition:opacity .15s}
+.cta-link:hover{opacity:.88}
+.restart-link{display:block;text-align:center;margin-top:1.5rem;font-size:13px;color:var(--muted);cursor:pointer;text-decoration:underline}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="card">
+
+  <div class="wordmark">
+    <div class="wordmark-line"></div>
+    <span class="wordmark-text">True Rein Leadership</span>
+  </div>
+
+  <!-- INTRO -->
+  <div id="s-intro">
+    <div class="display">Operational Readiness Assessment</div>
+    <div class="body-text">This 15-question diagnostic takes about five minutes. It surfaces where your operations are solid and where growing pains are most likely to cost you — across five areas that determine whether your systems can keep pace with your growth.</div>
+    <div class="cat-grid">
+      <div class="cat-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Process clarity</div>
+      <div class="cat-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>People &amp; accountability</div>
+      <div class="cat-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Vendor management</div>
+      <div class="cat-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>KPIs &amp; visibility</div>
+      <div class="cat-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Scalability</div>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="startAssessment()">Start assessment</button>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="s-question" class="hidden">
+    <div class="prog-wrap">
+      <div class="prog-meta">
+        <span id="cat-label" class="section-tag" style="margin:0"></span>
+        <span class="q-count" id="q-count"></span>
+      </div>
+      <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+    </div>
+    <div class="q-text" id="q-text"></div>
+    <div class="scale-list" id="scale-list"></div>
+    <div class="btn-row">
+      <button class="btn" id="btn-back" onclick="goBack()">Back</button>
+      <button class="btn btn-primary" id="btn-next" onclick="goNext()">Next</button>
+    </div>
+  </div>
+
+  <!-- CONTACT GATE -->
+  <div id="s-gate" class="hidden">
+    <div class="gate-icon">
+      <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <div class="display">Your results are ready</div>
+    <div class="body-text">Enter your information below to reveal your full operational diagnostic and see where TRL can have the most impact.</div>
+    <div class="field-row">
+      <div class="field"><label>First name</label><input type="text" id="f-first" placeholder="Jane" autocomplete="given-name"></div>
+      <div class="field"><label>Last name</label><input type="text" id="f-last" placeholder="Smith" autocomplete="family-name"></div>
+    </div>
+    <div class="field"><label>Work email</label><input type="email" id="f-email" placeholder="jane@company.com" autocomplete="email"></div>
+    <div class="field-row">
+      <div class="field"><label>Company name</label><input type="text" id="f-company" placeholder="Acme Co." autocomplete="organization"></div>
+      <div class="field"><label>Your title <span>(optional)</span></label><input type="text" id="f-title" placeholder="COO, VP Ops, etc."></div>
+    </div>
+    <div id="gate-error" class="error-msg">Please fill in all required fields with a valid email.</div>
+    <button class="btn btn-primary btn-full" id="btn-reveal" onclick="submitGate()" style="margin-top:.75rem">Reveal my results</button>
+    <p class="gate-note">Your information will only be used to send your results and for follow-up from True Rein Leadership. No spam, ever.</p>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="s-results" class="hidden">
+    <div class="section-tag">Your operational diagnostic</div>
+    <div class="display" id="res-name-line"></div>
+    <div class="body-text">Here is how your operations score across the five areas that matter most for scaling companies.</div>
+    <div class="overall-band">
+      <div class="score-ring"><span class="score-big" id="res-score"></span><span class="score-of">/ 75</span></div>
+      <div><div class="overall-tier" id="res-tier"></div><div class="overall-desc" id="res-desc"></div></div>
+    </div>
+    <div class="cat-list" id="cat-list"></div>
+    <div class="cta-band">
+      <div class="display">Ready to close the gaps?</div>
+      <div class="body-text">True Rein Leadership partners with scaling companies to replace operational chaos with clarity — through process design, accountability frameworks, vendor governance and KPI infrastructure built to last.</div>
+      <a class="cta-link" href="https://trl.coach" target="_blank" rel="noopener">Schedule a conversation &rarr;</a>
+    </div>
+    <span class="restart-link" onclick="restart()">Start over</span>
+  </div>
+
+</div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   !! CONFIGURATION — FILL IN BEFORE GOING LIVE !!
+   Values come from your Zoho CRM Webform generated code.
+════════════════════════════════════════════════════════ */
+const ZOHO_FORM_URL = 'https://crm.zoho.com/crm/WebToLeadForm';   // action="..." on the <form> tag
+const ZOHO_UID      = 'c8504d2528fa7835db86fc06f2423c85d65f8d550a6131b90380c46365faa7af';    // hidden input named xnQsjsdp
+const ZOHO_FORM_ID  = 'ed5876485dcfb71332a585893bb6ee122b6c4860fed5009115e57ceb28845ac0da13e5c4da0a7ae86a1b23c2627f5473';     // hidden input named xmIwtLD
+/* ═══════════════════════════════════════════════════════ */
+
+const SCALE_LABELS = ["Strongly disagree","Disagree","Neutral","Agree","Strongly agree"];
+
+const CATEGORIES = [
+  { name:"Process clarity", service:"process documentation, SOPs and workflow design",
+    icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+    qs:["Our core processes are documented and followed consistently across the team.","When something breaks, we have a clear escalation path that does not depend on one person knowing the right answer.","A new team member can get up to speed without pulling a senior person off their work for days."]
+  },
+  { name:"People & accountability", service:"role clarity, performance frameworks and organizational design",
+    icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    qs:["Roles and responsibilities are well-defined — people know exactly what they own.","When a performance gap appears, we address it quickly using a consistent, fair process.","Our team has the capacity and the capability to execute at our current growth rate."]
+  },
+  { name:"Vendor management", service:"vendor SLAs, performance scorecards and contract governance",
+    icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+    qs:["We have clear expectations and SLAs documented with our key vendors.","We regularly review vendor performance against agreed-upon metrics — not just when something goes wrong.","Vendor problems rarely catch us off guard."]
+  },
+  { name:"KPIs & visibility", service:"KPI design, scorecard build-out and reporting infrastructure",
+    icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+    qs:["Leadership has timely, clear visibility into operational performance without having to chase someone for a report.","We have defined KPIs that the whole team understands and tracks week over week.","Our data helps us make decisions before problems escalate, not after."]
+  },
+  { name:"Scalability", service:"growth readiness assessments and operational scaling plans",
+    icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+    qs:["Our current systems and processes could support twice our current volume without major rework.","Growth initiatives have clear owners, realistic timelines and defined success metrics.","We could onboard a significant new client or customer without our operations showing visible strain."]
+  }
+];
+
+const TOTAL = 15;
+let answers = new Array(TOTAL).fill(null);
+let current = 0;
+
+function show(id) {
+  ["s-intro","s-question","s-gate","s-results"].forEach(s =>
+    document.getElementById(s).classList.toggle("hidden", s !== id));
+}
+
+function startAssessment() { current = 0; show("s-question"); renderQ(); }
+
+function renderQ() {
+  const ci = Math.floor(current / 3), qi = current % 3, cat = CATEGORIES[ci];
+  document.getElementById("prog-fill").style.width = ((current / TOTAL) * 100) + "%";
+  document.getElementById("cat-label").textContent = cat.name;
+  document.getElementById("q-count").textContent = (current + 1) + " of " + TOTAL;
+  document.getElementById("q-text").textContent = cat.qs[qi];
+  document.getElementById("btn-back").disabled = current === 0;
+  document.getElementById("btn-next").textContent = current === TOTAL - 1 ? "See my results" : "Next";
+  const list = document.getElementById("scale-list");
+  list.innerHTML = "";
+  for (let v = 1; v <= 5; v++) {
+    const opt = document.createElement("div");
+    opt.className = "scale-opt" + (answers[current] === v ? " selected" : "");
+    opt.innerHTML = `<div class="radio"></div><span class="scale-label">${SCALE_LABELS[v-1]}</span><span class="scale-num">${v}</span>`;
+    opt.onclick = (function(val){ return function(){ answers[current] = val; renderQ(); }; })(v);
+    list.appendChild(opt);
+  }
+}
+
+function goBack() { if (current > 0) { current--; renderQ(); } }
+
+function goNext() {
+  if (answers[current] === null) {
+    const list = document.getElementById("scale-list");
+    list.style.outline = "1.5px solid #E24B4A";
+    list.style.borderRadius = "6px";
+    setTimeout(() => { list.style.outline = ""; }, 900);
+    return;
+  }
+  if (current === TOTAL - 1) { show("s-gate"); return; }
+  current++;
+  renderQ();
+}
+
+function tierLabel(s) {
+  if (s >= 12) return "Strong";
+  if (s >= 8)  return "Developing";
+  return "Critical gap";
+}
+
+function submitGate() {
+  const first   = document.getElementById("f-first").value.trim();
+  const last    = document.getElementById("f-last").value.trim();
+  const email   = document.getElementById("f-email").value.trim();
+  const company = document.getElementById("f-company").value.trim();
+  const title   = document.getElementById("f-title").value.trim();
+  const errEl   = document.getElementById("gate-error");
+
+  if (!first || !last || !email || !company || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errEl.style.display = "block"; return;
+  }
+  errEl.style.display = "none";
+  const btn = document.getElementById("btn-reveal");
+  btn.innerHTML = '<span class="spinner"></span>One moment...';
+  btn.disabled = true;
+
+  const catScores = CATEGORIES.map((_, ci) => {
+    const b = ci * 3;
+    return (answers[b] || 0) + (answers[b+1] || 0) + (answers[b+2] || 0);
+  });
+  const total = catScores.reduce((a, b) => a + b, 0);
+  const overallTier = total >= 60 ? "Well-structured" : total >= 40 ? "Growth-ready with gaps" : "Operationally at risk";
+  const now = new Date().toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
+
+  const description =
+    `Overall: ${total} / 75 — ${overallTier}\n\n` +
+    CATEGORIES.map((cat, ci) => `${cat.name}: ${catScores[ci]}/15 — ${tierLabel(catScores[ci])}`).join('\n') +
+    `\n\nSubmitted: ${now}`;
+
+  // POST to Zoho CRM Web-to-Lead (no-cors — response not readable but lead is created)
+  const body = new FormData();
+  body.append('xnQsjsdp',   ZOHO_UID);
+  body.append('xmIwtLD',    ZOHO_FORM_ID);
+  body.append('actionType', 'TGVhZHM=');
+  body.append('First Name', first);
+  body.append('Last Name',  last);
+  body.append('Email',      email);
+  body.append('Company',    company);
+  body.append('Designation', title || '');
+  body.append('Description', description);
+
+  fetch(ZOHO_FORM_URL, { method: 'POST', body, mode: 'no-cors' })
+    .then(() => showResults(first, total, catScores, overallTier))
+    .catch(() => showResults(first, total, catScores, overallTier));
+}
+
+function showResults(firstName, total, catScores, overallTier) {
+  show("s-results");
+  document.getElementById("res-name-line").textContent = firstName + "'s results";
+  document.getElementById("res-score").textContent = total;
+  document.getElementById("res-tier").textContent = overallTier;
+  const descs = {
+    "Well-structured": "Your operations have a strong foundation. The focus now is on fine-tuning your KPI infrastructure and building the scorecard visibility that sustains performance at the next growth stage.",
+    "Growth-ready with gaps": "You have meaningful strengths, but targeted gaps are likely creating drag, slowing decisions or increasing your key-person dependency. Addressing these now costs far less than fixing them mid-growth.",
+    "Operationally at risk": "Your operational infrastructure is not keeping pace with your growth ambitions. Without intervention, these gaps tend to compound — impacting retention, client satisfaction and leadership bandwidth."
+  };
+  document.getElementById("res-desc").textContent = descs[overallTier];
+
+  const container = document.getElementById("cat-list");
+  container.innerHTML = "";
+  CATEGORIES.forEach((cat, ci) => {
+    const s = catScores[ci];
+    const pct = Math.round((s / 15) * 100);
+    let badge, badgeClass, barColor, detail;
+    if (s >= 12) {
+      badge = "Strong"; badgeClass = "badge-strong"; barColor = "#639922";
+      detail = "This area is working well. Maintain it with periodic reviews and clear ownership documentation.";
+    } else if (s >= 8) {
+      badge = "Developing"; badgeClass = "badge-developing"; barColor = "#BA7517";
+      detail = "Foundational pieces exist but consistency or coverage is uneven. Targeted support in " + cat.service + " can close this gap efficiently.";
+    } else {
+      badge = "Critical gap"; badgeClass = "badge-critical"; barColor = "#C0392B";
+      detail = "This is a priority area. Unaddressed gaps in " + cat.service + " are likely costing you time, money or team trust right now.";
+    }
+    const div = document.createElement("div");
+    div.className = "cat-card";
+    div.innerHTML = `<div class="cat-top"><div class="cat-name">${cat.icon}${cat.name}</div><span class="badge ${badgeClass}">${badge} &nbsp;${s}/15</span></div><div class="cat-bar"><div class="cat-bar-fill" style="width:${pct}%;background:${barColor}"></div></div><div class="cat-detail">${detail}</div>`;
+    container.appendChild(div);
+  });
+}
+
+function restart() {
+  answers = new Array(TOTAL).fill(null);
+  current = 0;
+  document.getElementById("btn-reveal").innerHTML = "Reveal my results";
+  document.getElementById("btn-reveal").disabled = false;
+  ["f-first","f-last","f-email","f-company","f-title"].forEach(id => document.getElementById(id).value = "");
+  show("s-intro");
+}
+</script>
+</body>
+</html>
